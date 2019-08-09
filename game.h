@@ -1,7 +1,6 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 struct Ball
 {

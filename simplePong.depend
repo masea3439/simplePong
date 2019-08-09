@@ -411,11 +411,9 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1565380512 c:\users\mathieu\c++ projects\simplepong\game.h
+1565387144 c:\users\mathieu\c++ projects\simplepong\game.h
 	<SFML/Graphics.hpp>
-	<iostream>
 
-1565380412 source:c:\users\mathieu\c++ projects\simplepong\game.cpp
+1565380512 source:c:\users\mathieu\c++ projects\simplepong\game.cpp
 	"game.h"
-	<iostream>
 
