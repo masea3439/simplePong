@@ -1,6 +1,7 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 struct Ball
 {
@@ -26,6 +27,13 @@ private:
     sf::RectangleShape paddle1;
     Paddle paddle2;
     Ball ball;
+    int score1;
+    int score2;
+    sf::Texture numbersTexture;
+    sf::Sprite numbersPlayer1[10];
+    sf::Sprite numbersPlayer2[10];
+    sf::Texture barTexture;
+    sf::Sprite bar;
     void render();
     void update();
 

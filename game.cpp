@@ -5,6 +5,8 @@ Game::Game(): window(sf::VideoMode(600, 400), "Very Normal Pong")
 , frameTime(1.0f / 60)
 , clock()
 , paddle1(sf::Vector2f(5, 20))
+, score1(0)
+, score2(0)
 
 {
     paddle1.setPosition(20, 200);
@@ -15,6 +17,21 @@ Game::Game(): window(sf::VideoMode(600, 400), "Very Normal Pong")
     ball.vel_x = -2.0f;
     ball.vel_y = 1.0f;
     ball.shape.setFillColor(sf::Color::White);
+    numbersTexture.loadFromFile("assets\\pong_numbers.png");
+    for (int i = 0; i < 10; ++i)
+    {
+        numbersPlayer1[i].setTexture(numbersTexture);
+        numbersPlayer1[i].setTextureRect(sf::IntRect(i*5, 0, 4, 8));
+        numbersPlayer1[i].setScale(5, 5);
+        numbersPlayer1[i].setPosition(230, 10);
+        numbersPlayer2[i].setTexture(numbersTexture);
+        numbersPlayer2[i].setTextureRect(sf::IntRect(i*5, 0, 4, 8));
+        numbersPlayer2[i].setScale(5, 5);
+        numbersPlayer2[i].setPosition(350, 10);
+    }
+    barTexture.loadFromFile("assets\\pong_bar.png");
+    bar.setTexture(barTexture);
+    bar.setPosition(298, 0);
 }
 
 void Game::gameLoop()
@@ -64,7 +81,7 @@ void Game::update()
     static float y;
     static float size_y;
     static float paddle2_y;
-    static float paddle2_size_y;
+    static float paddle2_size_y = 20;
     static int random;
     static sf::FloatRect ball_box;
     x = ball.shape.getPosition().x;
@@ -87,6 +104,12 @@ void Game::update()
     }
 
     paddle2.update();
+    paddle2_y = paddle2.shape.getPosition().y;
+    if (paddle2_y > 400-paddle2_size_y)
+        paddle2.shape.setPosition(570, 400-paddle2_size_y);
+    if (paddle2_y < 0)
+        paddle2.shape.setPosition(570, 0);
+
 
     size_y = ball.shape.getSize().y;
     ball_box = ball.shape.getGlobalBounds();
@@ -98,7 +121,12 @@ void Game::update()
             ball.vel_y = -ball.vel_y;
         ball.shape.setPosition(300, y);
         if (x > 600)
+        {
             paddle2.shape.setSize(sf::Vector2f(5, paddle2_size_y + 5));
+            score1 += 1;
+        }
+        else
+            score2 += 1;
         return;
     }
     if ((y <= 0 && ball.vel_y < 0) || (y + size_y >= 400 && ball.vel_y > 0))
@@ -115,5 +143,8 @@ void Game::render()
     window.draw(ball.shape);
     window.draw(paddle1);
     window.draw(paddle2.shape);
+    window.draw(numbersPlayer1[score1]);
+    window.draw(numbersPlayer2[score2]);
+    window.draw(bar);
     window.display();
 }
