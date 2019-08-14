@@ -1,7 +1,7 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include <SFML/Audio.hpp>
 
 struct Ball
 {
@@ -24,6 +24,10 @@ private:
     sf::RenderWindow window;
     const float frameTime;
     sf::Clock clock;
+    int pauseTime;
+    bool displayStartText;
+    bool displayWinText;
+    bool displayLoseText;
     sf::RectangleShape paddle1;
     Paddle paddle2;
     Ball ball;
@@ -34,6 +38,16 @@ private:
     sf::Sprite numbersPlayer2[10];
     sf::Texture barTexture;
     sf::Sprite bar;
+    sf::Texture textTexture;
+    sf::Sprite startText;
+    sf::Sprite winText;
+    sf::Sprite loseText;
+    sf::SoundBuffer bounceBuffer;
+    sf::Sound bounce;
+    sf::SoundBuffer goalBuffer;
+    sf::Sound goal;
+    void renderMenu();
+    void processInput();
     void render();
     void update();
 
